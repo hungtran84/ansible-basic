@@ -1,0 +1,25 @@
+# This homelab consists of 4 linux VMs (2xCentOS + 2xUbuntu)
+Vagrant.configure("2") do |config|
+    n=2
+    ## 2 ubuntu focal fossa 20.04 VMs 
+    (1..n).each do |i|
+        config.vm.define "ubuntu#{i+10}" do | ubuntu |
+            ubuntu.vm.box = "ubuntu/focal64"
+            ubuntu.vm.network "private_network", ip: "192.168.100.#{i+10}"
+        end
+
+        config.vm.define "centos#{i+20}" do | centos |
+            centos.vm.box = "centos/7"
+            centos.vm.network "private_network", ip: "192.168.100.#{i+20}"
+        end
+    end 
+  
+    config.vm.box_check_update = false
+    config.vm.provider "virtualbox" do |v|
+        v.memory = 8192
+        v.cpus = 4
+  
+    end
+  
+  end
+   

@@ -1,0 +1,13 @@
+---
+- name: Ensure homebrew packages are installed.
+  hosts: localhost
+  tasks:
+    - name: Install VirtualBox
+      homebrew_cask:
+        name: virtualbox
+        state: latest
+
+    - name: Install Vagrant
+      homebrew_cask:
+        name: vagrant
+        state: latest
