@@ -1,7 +1,6 @@
 # This homelab consists of 4 linux VMs (2xCentOS + 2xUbuntu)
 Vagrant.configure("2") do |config|
     n=2
-    ## 2 ubuntu focal fossa 20.04 VMs 
     (1..n).each do |i|
         config.vm.define "ubuntu#{i+10}" do | ubuntu |
             ubuntu.vm.box = "ubuntu/bionic64"

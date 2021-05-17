@@ -40,7 +40,7 @@ Bringing machine 'centos22' up with 'virtualbox' provider...
 
 Grab a beer and wait for the simple magic. It may fail if you forget to trust VirtualBox application from your MacOS.
 
-## Setup Ansible service account
+## Setup Ansible service account (all nodes)
 
 ### Create Ansible user
 
@@ -104,7 +104,6 @@ sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/
 sudo systemctl restart sshd.service
 ```
 
-
 ### Configure Ansible control node (ubuntu11)
 
 - Generate an ssh key
@@ -127,4 +126,4 @@ ssh ansible@192.168.100.21 date
 Mon May 17 10:41:58 UTC 2021
 ```
 
-Let do some Ansible works
+Let do some Ansible works.
