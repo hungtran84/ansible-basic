@@ -154,4 +154,23 @@ centos22 | SUCCESS => {
 
 ### Host Variables and Group Variables
 
+- Using debug to find out the variable in Ansible inventory
 
+```bash
+ansible -i inventory/group_vars  all -m debug -a 'var=foo'
+fakehost.local | SUCCESS => {
+    "foo": "bar3"
+}
+centos21 | SUCCESS => {
+    "foo": "bar1"
+}
+ubuntu12 | SUCCESS => {
+    "foo": "bar2"
+}
+ubuntu11 | SUCCESS => {
+    "foo": "bar"
+}
+centos22 | SUCCESS => {
+    "foo": "bar1"
+}
+```
