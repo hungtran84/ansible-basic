@@ -1,0 +1,8 @@
+- name: Ensure user Ansible is present
+  ansible.windows.win_user:
+    name: Ansible
+    password: Hoanglinh90
+    state: present
+    password_expired: yes
+    groups:
+      - Administrator
