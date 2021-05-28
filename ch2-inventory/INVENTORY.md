@@ -146,7 +146,7 @@ centos22 | SUCCESS => {
 
 - Create PR to submit your work with following info:
     - Create your branch with the format: exercise-01-inventory-yml-{your name}
-    - Create ch2-inventory/student<your_number> directory contains 3 files with the same name but YAML format
+    - Create ch2-inventory/<student-name> directory contains 3 files with the same name but YAML format
     - Commit and push to your remote branch
     - Submit your PR with command results in PR body
 
