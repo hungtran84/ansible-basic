@@ -1,0 +1,13 @@
+[ubuntu]
+ubuntu11 ansible_host=192.168.100.11
+ubuntu12 ansible_host=192.168.100.12
+
+[centos]
+centos21 ansible_host=192.168.100.21
+centos22 ansible_host=192.168.100.22
+
+
+[linux:children]
+ubuntu
+centos
+
