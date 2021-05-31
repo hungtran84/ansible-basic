@@ -90,6 +90,32 @@ ubuntu11                   : ok=2    changed=0    unreachable=0    failed=0    s
 ubuntu12                   : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 ```
 
+## Extend your playbooks with `extra_vars` 
+
+```yaml
+---
+- name: The demo playbook
+  hosts: {{ myhosts }}
+  gather_facts: yes
+
+  tasks:
+    - name: Get the current user
+      shell: whoami
+      register: myUser
+
+    - name: Display the current user
+      debug:
+        msg: "The current user is {{ myUser.stdout }} "
+```
+
+- Pass the value to playbook variable
+
+```bash
+ansible-playbook 04-extra-vars.yaml -e "myhosts=centos"
+```
+
+## Loop and condition 
+
 
 
 
