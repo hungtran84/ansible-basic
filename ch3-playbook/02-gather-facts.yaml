@@ -1,9 +1,10 @@
 # Playbook for automated ping to all managed nodes
 ---
-- name: the simplest playbook
+- name: The simplest playbook
   hosts: all
-  gather_facts: no
+  gather_facts: yes
 
   tasks:
     - name: Ping all hosts
       ping:
+      when: ansible_os_family == 'Debian'
