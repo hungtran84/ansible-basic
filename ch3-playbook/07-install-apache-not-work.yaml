@@ -1,0 +1,17 @@
+# Playbook for automated apache installation
+---
+- name: The demo playbook
+  hosts: all
+  gather_facts: yes
+
+  tasks:
+    - name: Install Apache package
+      yum:
+        name: httpd
+        state: latest
+
+    - name: Restart and enable the service
+      service:
+        name: httpd
+        state: restarted
+        enabled: yes
