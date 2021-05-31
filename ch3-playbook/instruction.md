@@ -116,6 +116,27 @@ ansible-playbook 04-extra-vars.yaml -e "myhosts=centos"
 
 ## Loop and condition 
 
+```yaml
+---
+- name: The demo playbook
+  hosts: all
+  gather_facts: yes
+  become: yes # true = yes / false = no
 
+  tasks:
+    - name: create multiple directories
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: root
+        group: root
+        mode: 0775
+      loop:
+        - /tmp/a
+        - /tmp/b
+        - /tmp/c
+      
+      when: ansible_os_family == 'Debian'
+```
 
 
