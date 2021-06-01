@@ -6,12 +6,12 @@
 
   tasks:
     - name: Install Apache package
-      yum:
-        name: httpd
+      apt:
+        name: apache2
         state: latest
 
     - name: Restart and enable the service
-      service:
-        name: httpd
+      systemd:
+        name: apache2
         state: restarted
         enabled: yes
