@@ -7,9 +7,9 @@
   tasks:
     - name: Copy script over to linux nodes
       copy:
-        src: dummy.sh
+        src: index.html
         dest: /tmp/
         mode: 0755
 
-    - name: Running dummy script
-      shell: /tmp/dummy.sh
+    # - name: Running dummy script
+    #   shell: /tmp/dummy.sh

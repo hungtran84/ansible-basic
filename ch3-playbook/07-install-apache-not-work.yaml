@@ -3,15 +3,36 @@
 - name: The demo playbook
   hosts: all
   gather_facts: yes
+  become: yes
 
   tasks:
     - name: Install Apache package
       yum:
         name: httpd
         state: latest
-
-    - name: Restart and enable the service
+      when: ansible_os_family == 'RedHat'
+      notify:
+        - Restart and enable httpd
+    - name: Install Apache package
+      apt:
+        name: apache2
+        state: latest
+      when: ansible_os_family == 'Debian'
+      notify:
+        - Restart and enable apache
+    - name: copy source
+      copy:
+        src: index.html
+        dest: /var/www/html/
+        mode: 0755
+  handlers:
+    - name: Restart and enable httpd
       service:
         name: httpd
+        state: restarted
+        enabled: yes
+    - name: Restart and enable apache
+      service:
+        name: apache
         state: restarted
         enabled: yes
