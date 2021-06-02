@@ -1,0 +1,33 @@
+# Playbook for automated apache installation
+---
+- name: The demo playbook
+  hosts: all
+  gather_facts: yes
+  become: yes
+
+  tasks:
+    - name: Install Apache package Centos
+      yum:
+        name: httpd
+        state: latest 
+      when: ansible_os_family == 'RedHat'
+
+    - name: Install Apache package Ubuntu
+      apt:
+        name: apache2
+        state: latest
+      when: ansible_os_family == 'Debian'   
+
+    - name: Restart and enable on Centos
+      service:
+        name: httpd
+        state: restarted
+        enabled: yes
+      when: ansible_os_family == 'RedHat'
+
+    - name: Restart and enable on Ubuntu
+      service:
+        name: apache2
+        state: restarted
+        enabled: yes
+      when: ansible_os_family == 'Debian'
