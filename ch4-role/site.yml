@@ -7,3 +7,11 @@
     - name: Setup Apache using role
       import_role:
         name: apache2
+    
+    - name: Check the welcome page
+      shell: curl {{ inventory_hostname }}
+      register: welcome_page
+
+    - name: Display welcome page
+      debug:
+        msg: "{{ welcome_page.stdout }}"
