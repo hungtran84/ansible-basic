@@ -1,0 +1,18 @@
+---
+# tasks file for apache2
+- name: Install Apache
+  package:
+    name: "{{ packages[ansible_os_family] }}"
+    state: latest
+
+- name: Configuring service
+  service:
+    name: "{{ services[ansible_os_family] }}"
+    state: restarted
+    enabled: yes
+
+- name: Copy welcome page
+  notify: Restart Apache
+  template:
+    src: "templates/index.html.j2"
+    dest: "/var/www/html/index.html"
