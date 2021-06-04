@@ -9,7 +9,7 @@
         Debian: apache2
         RedHat: httpd
   tasks:
-    - name: Install Apache package Centos
+    - name: Install Apache package
       yum:
         name: "{{ web_server[ansible_os_family] }}"
         state: latest
