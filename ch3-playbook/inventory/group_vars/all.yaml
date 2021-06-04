@@ -1,2 +1,4 @@
-ansible_user: ansible
-ansible_password: admin123 #will be moved into Ansible Vault for more secure
+#ansible_user: ansible
+#ansible_password: admin123 #will be moved into Ansible Vault for more secure
+ansible_become: yes
+ansible_become_method: sudo
