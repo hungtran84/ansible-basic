@@ -1,2 +1,0 @@
-ansible_user: ansible
-ansible_password: admin123 #will be moved into Ansible Vault for more secure
