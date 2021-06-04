@@ -1,0 +1,40 @@
+---
+- name: Install apache
+  hosts: all
+  gather_facts: true
+  become: yes
+  vars:
+    my_name: 'SanhDP'
+
+  tasks:
+    - name: Install Ubuntue apache
+      apt:
+        name: apache2
+        state: latest
+      when: ansible_os_family == 'Debian'
+
+    - name: Install Centos apache
+      yum:
+        name: httpd
+        state: latest
+      when: ansible_os_family == 'Redhat'
+
+    - name: Template index.html
+      template:
+        src: ./files/sanhdp.html
+        dest: /var/www/html/index.html
+        mode: 0755
+    
+    - name: Restart and enable Ubuntu apache
+      service:
+        name: apache2
+        state: restarted
+        enabled: yes
+      when: ansible_os_family == 'Debian'
+
+    - name: Restart and enable Centos apache
+      service:
+        name: httpd
+        state: restarted
+        enabled: yes
+      when: ansible_os_family == 'Debian'
