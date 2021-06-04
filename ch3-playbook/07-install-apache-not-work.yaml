@@ -3,15 +3,25 @@
 - name: The demo playbook
   hosts: all
   gather_facts: yes
-
+  vars:
+    - my_name: tinnc
+    - web_server:
+        Debian: apache2
+        RedHat: httpd
   tasks:
-    - name: Install Apache package
+    - name: Install Apache package Centos
       yum:
-        name: httpd
+        name: "{{ web_server[ansible_os_family] }}"
         state: latest
+
+    - name: index Hello!
+      template:
+        src: "files/index.html"
+        dest: "/var/www/html/"
+        mode: 0755
 
     - name: Restart and enable the service
       service:
-        name: httpd
+        name: "{{ web_server[ansible_os_family] }}"
         state: restarted
         enabled: yes
