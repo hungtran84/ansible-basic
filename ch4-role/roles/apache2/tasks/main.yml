@@ -1,0 +1,25 @@
+---
+# tasks file for apache2
+- name: Install Apache2 on Ubuntu
+  apt:
+    pkg: apache2
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: Install Apache2 on Centos
+  yum:
+    name: httpd
+    state: latest
+  when: ansible_os_family == 'RedHat'
+
+- name: Configuring service 
+  service:
+    name: "{{ apache_service }}"
+    state: started
+    enabled: yes
+
+- name: Copy index test page
+  template:
+    src: "templates/index.html.j2"
+    dest: "{{ apache_default_site }}/index.html"
+  notify: Restart apache2

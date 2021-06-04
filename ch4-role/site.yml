@@ -1,0 +1,9 @@
+- name: Setup Apache web server
+  hosts: all
+  gather_facts: yes
+  become: yes
+
+  tasks:
+    - name: Setup Apache using role
+      import_role:
+        name: apache2
