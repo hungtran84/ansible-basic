@@ -1,0 +1,13 @@
+[ubuntu]
+ubuntu-2 ansible_host=192.168.94.242
+ubuntu-3 ansible_host=192.168.94.243
+
+#[centos]
+#centos21 ansible_host=192.168.100.21
+#centos22 ansible_host=192.168.100.22
+
+
+#[linux:children]
+#ubuntu
+#centos
+

@@ -1,0 +1,7 @@
+---
+# defaults file for apache2
+my_var: QuanPT
+packages:
+ Debian: apache2
+ Redhat: httpd
+
