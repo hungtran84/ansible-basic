@@ -1,16 +1,9 @@
 ---
 # tasks file for apache2
 - name: Install Apache2 on Ubuntu
-  apt:
-    pkg: apache2
+  package:
+    name: "{{ apache_service }}" 
     state: present
-  when: ansible_os_family == 'Debian'
-
-- name: Install Apache2 on Centos
-  yum:
-    name: httpd
-    state: latest
-  when: ansible_os_family == 'RedHat'
 
 - name: Configuring service 
   service:

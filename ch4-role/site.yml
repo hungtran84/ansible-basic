@@ -2,11 +2,10 @@
   hosts: all
   gather_facts: yes
   become: yes
-
+  roles: 
+    - apache2
   tasks:
-    - name: Setup Apache using role
-      import_role:
-        name: apache2
+    - meta: flush_handlers
     
     - name: Check the welcome page
       shell: curl {{ inventory_hostname }}
