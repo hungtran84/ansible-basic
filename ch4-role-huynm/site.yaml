@@ -9,7 +9,6 @@
         name: apache2
 
     - name: Check Web page
-      shell: curl http://localhost
+      shell: curl http://{{ inventory_hostname }}
       register: ps
     - debug: var=ps.stdout_lines
-
