@@ -1,0 +1,15 @@
+- name: Apache web server Roles
+  hosts: all
+  gather_facts: yes
+  become: yes
+
+  tasks:
+    - name: Apache role
+      import_role:
+        name: apache2
+
+    - name: Check Web page
+      shell: curl http://localhost
+      register: ps
+    - debug: var=ps.stdout_lines
+
