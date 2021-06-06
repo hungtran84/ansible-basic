@@ -8,6 +8,8 @@
       import_role:
         name: apache2
 
+    - meta: flush_handlers
+    
     - name: Check the welcome page
       shell: curl {{ inventory_hostname }}
       register: result
