@@ -8,7 +8,7 @@
     when: ansible_os_family == 'RedHat'
   - name: restart web
     service:
-      name: apache
+      name: apache2
       state: restarted
       enabled: yes
     when: ansible_os_family == 'Debian'
