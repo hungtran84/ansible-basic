@@ -1,0 +1,27 @@
+- name: Apache web server Roles
+  hosts: all
+  gather_facts: yes
+  become: yes
+
+  tasks:
+    - name: Apache role
+      import_role:
+        name: apache2
+
+#  - name: test
+#      local_action: shell ip a
+#      register: ps
+#  - debug: var=ps.stdout_lines
+#
+
+#    - name: Check Web page
+#      local_action: shell curl http://{{ inventory_hostname }}
+#      register: ps
+#    - debug: var=ps.stdout_lines
+
+    - name: Check Web page
+      local_action:
+        module: shell
+        args: curl http://{{ inventory_hostname }}
+      register: ps
+    - debug: var=ps.stdout_lines
