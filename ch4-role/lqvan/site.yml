@@ -6,7 +6,6 @@
   become: yes
 
   tasks:
-   - meta: flush_handlers
    - name: Setup Apache using role
      import_role:
        name: apache2
