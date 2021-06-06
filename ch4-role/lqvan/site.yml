@@ -6,14 +6,19 @@
   become: yes
 
   tasks:
+   - meta: flush_handlers
    - name: Setup Apache using role
      import_role:
        name: apache2
   
    - name: Check the welcome page
-     shell: cat /var/www/html/index.html
+     uri:
+       method: GET
+       return_content: yes
+       status_code: 200
+       url: "http://{{ inventory_hostname }}"
      register: result
-     
+
    - name: Display welcome page
      debug:
-       msg: "{{ result.stdout }}"
+       msg: "{{ result.content }}"
