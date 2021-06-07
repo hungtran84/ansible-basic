@@ -3,6 +3,7 @@
 - name: Install Apache
   package:
     name: "{{ apache }}"
+    state: present
 
 - name: Copy welcome page
   template:

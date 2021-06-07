@@ -9,7 +9,7 @@
         name: apache2
 
     - name: Check the welcome page
-      shell: cat /var/www/html/index.html
+      shell: curl "{{ inventory_hostname }}"
       register: result
 
     - name: Display welcome page
