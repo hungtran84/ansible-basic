@@ -1,0 +1,25 @@
+---
+- name: Simple delegate_to demonstration play
+  hosts: centos
+  gather_facts: yes
+
+  tasks:
+    - name: Get the directory structure
+      run_once: true
+      command: tree "{{ playbook_dir }}"
+      delegate_to: localhost
+      register: dir_layout
+
+    - name: Display dir layout - 1
+      run_once: true
+      debug: msg="{{ dir_layout.stdout_lines }}"
+      delegate_to: localhost
+
+    - name: Display dir layout - 2
+      run_once: true
+      local_action: debug msg="{{ dir_layout.stdout_lines }}"
+
+    - name: Display dir layout - 3
+      run_once: true
+      connection: local
+      debug: msg="{{ dir_layout.stdout_lines }}"

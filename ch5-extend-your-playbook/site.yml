@@ -1,0 +1,18 @@
+- name: Setup Apache web server
+  hosts: all
+  gather_facts: yes
+  become: yes
+  roles: 
+    - apache2
+  tasks:
+    - meta: flush_handlers
+
+    - block:  
+      - name: Check the welcome page
+        shell: curl {{ inventory_hostname }}
+        register: welcome_page
+
+      - name: Display welcome page
+        debug:
+          msg: "{{ welcome_page.stdout }}"
+      when: apache_state == 'present'
