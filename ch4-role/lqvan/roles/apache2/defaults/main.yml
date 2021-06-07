@@ -1,11 +1,6 @@
 ---
 # defaults file for apache2
 welcome_user: lqvan
-packages:
-  Debian:
-   - apache2
-  RedHat:
-   - httpd
-services:
+apache:
   Debian: apache2
   RedHat: httpd

@@ -2,12 +2,12 @@
 # tasks file for apache2
 - name: Install Apache
   package:
-    name: "{{ packages[ansible_os_family] }}"
+    name: "{{ apache[ansible_os_family] }}"
     state: latest
 
 - name: Configuring service
   service:
-    name: "{{ services[ansible_os_family] }}"
+    name: "{{ apache[ansible_os_family] }}"
     state: restarted
     enabled: yes
 
