@@ -1,0 +1,28 @@
+---
+- name: A simple play to demonstrate block and tags in a playbook
+  hosts: all
+
+  vars_prompt:
+    - name: loginid
+      prompt: "Enter your username"
+      private: no
+    - name: password
+      prompt: "Enter your password"
+      private: yes
+
+  tasks:
+    - block: 
+      - name: Proceed with login
+        debug:
+          msg: "Logging in as {{ loginid }} ..."        
+      
+      - name: Start mining coin
+        debug:
+          msg: "Start coin miner machine"
+
+      - name: Measure power consumption
+        debug:
+          msg: "Start power measuring engine"
+
+      when: inventory_hostname == 'ubuntu11'
+      tags: coin-mining

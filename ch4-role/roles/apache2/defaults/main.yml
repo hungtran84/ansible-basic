@@ -1,0 +1,4 @@
+---
+# defaults file for apache2
+app_user: student
+apache_service: apache2 # default platform is Ubuntu/Debian

@@ -1,0 +1,11 @@
+---
+- name: Simple serial demonstration play
+  hosts: all
+  serial: 1
+  gather_facts: false
+
+  tasks:
+    - name: First task
+      debug: msg='This is the first task'
+    - name: Second task
+      debug: msg='This is the second task'

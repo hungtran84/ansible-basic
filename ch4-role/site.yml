@@ -1,0 +1,24 @@
+- name: Setup Apache web server
+  hosts: all
+  gather_facts: yes
+  become: yes
+
+  tasks:
+    - import_role: 
+        name: apache2
+    - meta: flush_handlers
+
+    - debug: var=ansible_host
+      tags: debug
+      delegate_to: localhost
+    
+    - name: Check the welcome page
+      become: no
+      shell: curl http://{{ ansible_host }}
+      register: welcome_page
+      delegate_to: localhost
+
+    - name: Display welcome page
+      debug:
+        msg: "{{ welcome_page.stdout }}"
+      delegate_to: localhost
