@@ -4,7 +4,7 @@
 - name: Install apache
   package:
     name: "{{ packages[ansible_os_family] }}"
-    state: latest
+    state: present
 
 - name: Config service
   service:
