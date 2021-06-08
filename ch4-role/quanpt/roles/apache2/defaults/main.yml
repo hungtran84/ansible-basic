@@ -1,6 +1,7 @@
 ---
 # defaults file for apache2
-my_var: QuanPT
+#user: ansible
+#password: "{{ ansible_password }}"
 packages:
  Debian: apache2
  Redhat: httpd

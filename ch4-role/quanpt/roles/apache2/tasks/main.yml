@@ -13,7 +13,7 @@
     enabled: yes
 
 - name: Template index.html
-  #notify: Restart Apache
+  notify: Restart Apache
   template:
     src: "templates/index.html"
     dest: "/var/www/html/index.html"
