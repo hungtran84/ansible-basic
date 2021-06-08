@@ -1,0 +1,36 @@
+---
+# tasks file for install apache2
+- name: Install Apache
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items: 
+    - "{{ apache[ansible_os_family] }}" 
+    - php
+    - php-mysql
+    - php-common
+
+- name: Configuring service
+  service:
+    name: "{{ apache[ansible_os_family] }}"
+    state: restarted
+    enabled: yes
+
+- name: Copy welcome page
+  template:
+    # src: "templates/index.php.j2"
+    src: "../templates/index.php.j2"
+    dest: "/var/www/html/index.php"
+  # notify: Restart Apache
+
+# - name: Force all notified handlers to run at this point, not waiting for normal sync points
+#   meta: flush_handlers
+
+- name: Check the welcome page
+  shell: curl http://"{{ ansible_host }}/index.php"
+  # delegate_to: localhost
+  register: result
+
+- name: Display welcome page
+  debug:
+    msg: "{{ result.stdout_lines }}"

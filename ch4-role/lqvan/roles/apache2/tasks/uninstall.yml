@@ -1,0 +1,32 @@
+---
+# tasks file for uninstall apache2
+- name: Disabled service
+  service:
+    name: "{{ apache[ansible_os_family] }}"
+    state: stopped
+    enabled: no
+
+- name: Uninstall Apache
+  package:
+    name: "{{ item }}"
+    state: absent
+  with_items: 
+    - "{{ apache[ansible_os_family] }}" 
+    - php
+    - php-mysql
+    - php-common
+
+- name: Remove welcome page
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+  - "/var/www/html/index.php"
+
+- name: Check exist Index PHP File
+  shell: ls "/var/www/html"
+  register: result
+
+- name: Display Result
+  debug:
+    msg: "{{ result.stdout_lines }}"

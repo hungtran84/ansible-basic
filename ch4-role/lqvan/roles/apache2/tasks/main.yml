@@ -1,21 +1,4 @@
 ---
-# tasks file for apache2
-- name: Install Apache
-  package:
-    name: "{{ apache[ansible_os_family] }}"
-    state: latest
-
-- name: Configuring service
-  service:
-    name: "{{ apache[ansible_os_family] }}"
-    state: restarted
-    enabled: yes
-
-- name: Copy welcome page
-  template:
-    src: "templates/index.html.j2"
-    dest: "/var/www/html/index.html"
-  notify: Restart Apache
-
-- name: Force all notified handlers to run at this point, not waiting for normal sync points
-  meta: flush_handlers
+# tasks for apache2
+- include: install.yml
+- include: uninstall.yml
