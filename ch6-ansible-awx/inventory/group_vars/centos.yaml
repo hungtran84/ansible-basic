@@ -1,2 +1,0 @@
-apache_service: httpd
-apache_default_site: /usr/share/httpd/noindex
