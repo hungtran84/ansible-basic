@@ -1,0 +1,25 @@
+all:
+  hosts:
+    fakehost.local:
+  children:
+    linux:
+      children:
+        ubuntu:
+          hosts:
+            ubuntu11:
+              ansible_host: 192.168.100.11
+              foo: bar
+            ubuntu12:
+              ansible_host: 192.168.100.12
+          vars:
+            foo: bar2
+        centos:
+          hosts:
+            centos21:
+              ansible_host: 192.168.100.21
+            centos22:
+              ansible_host: 192.168.100.22
+      vars:
+        foo: bar1
+  vars:
+    foo: bar3
