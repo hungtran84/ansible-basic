@@ -1,0 +1,9 @@
+---
+apiVersion: awx.ansible.com/v1beta1
+kind: AWX
+metadata:
+  name: awx-demo
+spec:
+  service_type: LoadBalancer
+  loadbalancer_protocol: http
+  loadbalancer_port: 80
