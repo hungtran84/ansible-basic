@@ -1,0 +1,30 @@
+# site.yml
+---
+- name: Setup and Uninstall Apache web server
+  hosts: all
+  gather_facts: yes
+  become: yes
+
+  vars_files:
+    - roles/apache2/defaults/main.yml
+
+  tasks:
+    - include: "roles/apache2/tasks/install.yml"
+      when: ("{{ run_option }}" == "install")
+
+    - include: "roles/apache2/tasks/uninstall.yml"
+      when: ("{{ run_option }}" == "uninstall")
+  
+  #  - name: Setup Apache using role
+  #    import_role:
+  #      name: apache2
+  
+  #  - name: Check the welcome page
+  #   #  shell: curl http://"{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
+  #    shell: curl http://"{{ ansible_host }}/index.php"
+  #    delegate_to: localhost
+  #    register: result
+
+  #  - name: Display welcome page
+  #    debug:
+  #      msg: "{{ result.stdout_lines }}"

@@ -1,0 +1,6 @@
+---
+# defaults file for apache2
+welcome_user: lqvan
+apache:
+  Debian: apache2
+  RedHat: httpd

@@ -1,0 +1,6 @@
+---
+# handlers file for apache2
+- name: Restart Apache
+  service:
+    name: "{{ apache[ansible_os_family] }}"
+    state: restarted

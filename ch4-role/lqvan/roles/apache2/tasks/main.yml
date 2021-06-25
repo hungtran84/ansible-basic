@@ -1,0 +1,4 @@
+---
+# tasks for apache2
+- include: install.yml
+- include: uninstall.yml
