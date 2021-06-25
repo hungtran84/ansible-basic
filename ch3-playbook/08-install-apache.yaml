@@ -1,0 +1,47 @@
+# Playbook for automated apache installation
+---
+- name: The demo playbook
+  hosts: all
+  become: true
+  gather_facts: yes
+  vars:
+    - repo:
+        Debian:
+        - apt # already installed, but need something here
+        RedHat:
+        - epel-release
+    - packages:
+        Debian:
+        - apache2
+        RedHat:
+        - httpd
+    - services:
+        Debian: apache2
+        RedHat: httpd
+    - http_host:
+        Debian:
+         - lqvan-Debian
+        RedHat:
+         - lqvan-RedHat
+
+  tasks:
+    - name: Install repo
+      # Seperate package transaction for EPEL
+      # so it is available in the next task
+      package:
+        name: "{{ repo[ansible_os_family] }}"
+    - name: Install Web Server Packages
+      # Keyed by OS family fact to also support RHEL and Debian
+      package:
+        name: "{{ packages[ansible_os_family] }}"
+        state: latest
+    - name: Copy index test page
+      template:
+        src: "files/index.html.j2"
+        dest: "/var/www/html/index.html"
+
+    - name: Restart and enable the web service
+      service:
+        name: "{{ services[ansible_os_family] }}"
+        state: restarted
+        enabled: yes
