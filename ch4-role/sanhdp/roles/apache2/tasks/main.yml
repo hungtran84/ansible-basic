@@ -1,0 +1,13 @@
+---
+# tasks file for apache2
+- name: Install Apache
+  package:
+    name: "{{ apache }}"
+    state: present
+
+- name: Copy welcome page
+  template:
+    src: "templates/index.html.j2"
+    dest: "/var/www/html/index.html"
+  notify: 
+    - Restart Apache
