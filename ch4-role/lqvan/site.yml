@@ -1,0 +1,23 @@
+# site.yml
+---
+- name: Setup Apache web server
+  hosts: all
+  gather_facts: yes
+  become: yes
+
+  tasks:
+   - name: Setup Apache using role
+     import_role:
+       name: apache2
+  
+   - name: Check the welcome page
+     uri:
+       method: GET
+       return_content: yes
+       status_code: 200
+       url: "http://{{ inventory_hostname }}"
+     register: result
+
+   - name: Display welcome page
+     debug:
+       msg: "{{ result.content }}"
