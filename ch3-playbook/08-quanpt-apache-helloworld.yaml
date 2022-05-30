@@ -3,6 +3,9 @@
 - name: The demo playbook
   hosts: all
   gather_facts: yes
+  become: yes
+  vars:
+    my_name: 'QuanPT'
 
   tasks:
     - name: Install Apache package
@@ -10,6 +13,11 @@
         name: apache2
         state: latest
 
+    - name: template index.html
+      template:
+        src: ./files/index.html
+        dest: /var/www/html/
+        mode: 0755
     - name: Restart and enable the service
       systemd:
         name: apache2

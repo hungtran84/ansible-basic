@@ -1,0 +1,8 @@
+---
+# defaults file for apache2
+#user: ansible
+#password: "{{ ansible_password }}"
+packages:
+ Debian: apache2
+ Redhat: httpd
+

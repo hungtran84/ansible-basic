@@ -1,0 +1,36 @@
+- name: Setup Apache 
+  hosts: all
+  gather_facts: yes
+  become: yes
+  vars_prompt:
+  - name: choose
+    prompt: Enter '1' to install or '2 ' to uninstall. '1' is default
+    default: "1"
+    private: no
+  tasks:
+  - block: 
+    - debug:
+       msg: "You choose Install Apache2"    
+    - name: Install Apache
+      import_role:
+        name: apache2
+      when: choose == "1"
+    - name: test apache
+      shell: curl {{ansible_hostname}}
+      delegate_to: 127.0.0.1
+      register: out
+    - debug:
+       msg: "{{ out.stdout }}"
+    when: choose == "1"
+  - block:
+    - debug:
+       msg: "You choose Uninstall Apache2"
+    - name: Stop service
+      systemd:
+       name: "{{ packages[ansible_os_family] }}"
+       state: stopped
+    - name: Uninstall Apache
+      package:
+       name: "{{ packages[ansible_os_family] }}"
+       state: absent
+    when: choose == "2"

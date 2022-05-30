@@ -1,0 +1,19 @@
+---
+# tasks file for apache2
+#
+- name: Install apache
+  package:
+    name: "{{ packages[ansible_os_family] }}"
+    state: present
+
+- name: Config service
+  service:
+    name: "{{ packages[ansible_os_family] }}"
+    state: restarted
+    enabled: yes
+
+- name: Template index.html
+  notify: Restart Apache
+  template:
+    src: "templates/index.html"
+    dest: "/var/www/html/index.html"
